@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Contract Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/contract-styles.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script src="/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.4/signature_pad.js" integrity="sha512-j36pYCzm3upwGd6JGq6xpdthtxcUtSf5yQJSsgnqjAsXtFT84WH8NQy9vqkv4qTV9hK782TwuHUTSwo2hRF+/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-6" >
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Supply Chain Contract Solution</h1>
+            <nav class="space-x-4">
+                <a href="/pages/index.html" class="hover:underline">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 bg-white shadow-md rounded-md mt-8">
+        
+        <!-- Transaction Data Input Form -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Step 1: Input Transaction Data</h2>
+            
+
+                <label class="block text-gray-700 font-semibold mb-2" for="productType">Product Type:</label>
+                <select id="productType" class="w-full border border-gray-300 rounded-md p-2" name="productType">
+                    <option value="cocoa">Cocoa Powder</option>
+                    <option value="cotton">Cotton</option>
+                </select>
+            
+                <label class="block text-gray-700 font-semibold mb-2" for="jurisdiction">Legal Jurisdiction:</label>
+                <select id="jurisdiction" class="w-full border border-gray-300 rounded-md p-2" name="jurisdiction">
+                    <option value="USA">USA</option>
+                    <option value="EU">European Union</option>
+                </select>
+
+                <!-- Supply Chain Stages -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Supply Chain Stage</label>
+                    <select id="chainStage" class="w-full border border-gray-300 rounded-md p-2">
+                        <option>Extraction</option>
+                        <option>Transport</option>
+                        <option>Storage</option>
+                        <option>Refining</option>
+                        <option>Production</option>
+                        <option>Distribution</option>
+                    </select>
+                </div>
+
+                <!-- Transaction Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div >
+                        <label class="block text-gray-700 font-semibold mb-2">Participant</label>
+                        <input type="text" id="companyName" placeholder="Company or Participant Name" class="w-full border border-gray-300 rounded-md p-2">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Product/Service</label>
+                        <input type="text" id="productName" placeholder="Product or Service Details" class="w-full border border-gray-300 rounded-md p-2">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Transaction Type</label>
+                        <select id="transactionType" class="w-full border border-gray-300 rounded-md p-2">
+                            <option>Purchase</option>
+                            <option>Sale</option>
+                            <option>Lease</option>
+                            <option>Exchange</option>
+                        </select> 
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Date of Transaction</label>
+                        <input id="date_of_birth" type="date" class="w-full border border-gray-300 rounded-md p-2">
+                    </div>
+                </div>
+
+                <button type="submit" onclick="getContractData()" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700">Retrieve Applicable Rules and Legislation</button>
+                <div id="lawContent" class="border border-gray-300 rounded-md p-4 bg-gray-50">
+                    <p id="content"></p>
+                </div>
+
+        </section>
+        
+        <!-- Contract Draft Section -->
+
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Step 2: Contract Draft</h2>
+            <button id="generate-contract" onclick="generateAndDisplayPDF()" class="bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700 mb-4">Generate Draft Contract</button>
+            <div id="invoice" class="border border-gray-300 rounded-md p-4 bg-gray-50">
+                <h1 id="MyHeading"></h1>
+            </div>
+            <script
+			src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.72/pdfmake.min.js"
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<!--vfs_fonts.js is essential for embedding fonts into PDF documents created with pdfmake-->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.72/vfs_fonts.js"
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+        </section>
+            
+        
+        <!-- Review & Approval Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Step 3: Review & Approval</h2>
+
+            <!-- Participants Review Status -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="p-4 border border-gray-300 rounded-md">
+                    <h3 class="text-gray-700 font-semibold">Participant 1</h3>
+                    <p class="text-sm text-gray-600 mb-2">Status: <span id="status" class="font-bold text-red-500">Not Confirmed</span></p>
+                    <textarea id="changes" placeholder="Enter your comments or feedback here..." class="feedbackBox"></textarea>
+                </div>
+                <div class="p-4 border border-gray-300 rounded-md">
+                    <h3 class="text-gray-700 font-semibold">Participant 2</h3>
+                    <p class="text-sm text-gray-600 mb-2">Status: <span id="status" class="font-bold text-red-600">Not Confirmed</span></p>
+                    <div id="hide" class="border border-gray-300 rounded-md p-4 bg-gray-50">
+                        <p id="participantChange"></p>
+                    </div>
+                    <button onclick="viewChanges()" class="bg-yellow-500 text-white font-semibold py-1 px-2 rounded hover:bg-yellow-600">View</button>  
+                </div>
+            </div>
+
+            <!-- E-Signature -->
+            <div id="signature-area" class="border border-gray-300 rounded-md p-4 bg-gray-50 mt-4">
+                <h2>Provide Your Signature</h2>
+                <canvas id="signature-pad" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
+                <div class="actions">
+                    <button id="clear-signature" class="bg-red-600 text-white font-semibold py-2 px-4 rounded hover:bg-red-700">
+                        Clear Signature
+                    </button>
+                    <button onclick="getChanges()" id="sign-all-contracts" class="bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700">
+                        E-Sign All Contracts
+                    </button>
+                </div>
+
+                <div id="contract-container">
+                </div>
+            
+                <script>
+                    window.onload = function() {
+                        loadContractFromLocalStorage();
+                        loadStatus();
+                    };
+            
+                    // Load the saved contract from localStorage and display it
+                    function loadContractFromLocalStorage() {
+                        const savedContracts = JSON.parse(localStorage.getItem('SignedContracts')) || [];
+                        
+                        if (savedContracts.length > 0) {
+                            const contractToLoad = savedContracts[0]; // Load the first contract
+                            pdfMake.createPdf(contractToLoad.content).getDataUrl((dataUrl) => {
+                                const contractContainer = document.getElementById('contract-container');
+                                contractContainer.innerHTML = `
+                                    <iframe src="${dataUrl}" width="100%" height="500px" style="border: none;"></iframe>
+                                `;
+                            });
+                        } else {
+                            alert('No contracts found in localStorage.');
+                        }
+                    }
+
+                    function loadStatus() {
+                        const savedStatus = JSON.parse(localStorage.getItem('ContractStatus'));
+                        if (savedStatus) {
+                            const statusElement = document.getElementById('status');
+                            statusElement.textContent = savedStatus.text;
+            
+                            // Remove all possible old color classes and add the saved color class
+                            statusElement.className = "text-green-500";
+                        }
+                    };
+                </script>
+
+
+            <!-- <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700">Sign Contract</button> -->
+        </section>
+    </main>
+
+    
+
+    <!-- Footer -->
+    <footer class="b g-gray-800 text-gray-300 p-6 mt-8">
+        <div class="container mx-auto text-center">
+            <p>© 2023 Supply Chain Lawtech Solution. All rights reserved.</p>
+            <p class="text-sm">Privacy Policy | Terms of Service | Contact Info</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supply Chain Management LawTech Solution</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #84fab0, #8fd3f4);
+      color: #2d3436;
+      line-height: 1.6;
+      padding-top: 80px; /* Prevent content from hiding behind navbar */
+    }
+
+    html {
+      scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      background-color: #2d3436;
+      color: #fff;
+      padding: 20px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: padding 0.3s ease, background-color 0.3s ease;
+    }
+
+    header.shrink {
+      padding: 10px 0;
+      background-color: #1e272e;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav ul li a {
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background-color: #84fab0;
+      color: #2d3436;
+    }
+
+    /* Section Styles */
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2d3436;
+    }
+
+    /* Fade-in Animation */
+    .section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #features .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #features .features-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #features .features-list li:last-child {
+      border-bottom: none;
+    }
+
+    #features .features-list li strong {
+      color: #2d3436;
+    }
+
+    /* Contact Form */
+    .contact-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 120px auto 40px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form label {
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      width: 100%;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #84fab0;
+      outline: none;
+    }
+
+    .contact-form button {
+      padding: 12px 20px;
+      background-color: #84fab0;
+      color: #2d3436;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .contact-form button:hover {
+      background-color: #2d3436;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background-color: #2d3436;
+      color: #fff;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Supply Chain LawTech</h1>
+      <nav>
+        <ul>
+          <li><a href="/pages/contract.html">Supply Chain</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="section">
+      <div class="hero-content">
+        <h2>Revolutionizing Supply Chain Contracts</h2>
+        <p>Seamlessly integrate legal compliance and automate your supply chain transactions.</p>
+        <a href="#overview" class="btn">Learn More</a>
+      </div>
+    </section>
+
+    <section id="overview" class="container section">
+      <h2>Overview</h2>
+      <p>Our platform streamlines supply chain processes by providing real-time compliance and automated contract generation. From raw materials to the end consumer, we’ve got you covered.</p>
+    </section>
+
+    <section id="process" class="container section">
+      <h2>Process</h2>
+      <div class="process-steps">
+        <div class="step">
+          <h3>1. Data Collection</h3>
+          <p>Transactional data is gathered from all participants.</p>
+        </div>
+        <div class="step">
+          <h3>2. Rule Integration</h3>
+          <p>Relevant rules and legislation are applied automatically.</p>
+        </div>
+        <div class="step">
+          <h3>3. Contract Drafting</h3>
+          <p>Contracts are dynamically generated based on input data.</p>
+        </div>
+        <div class="step">
+          <h3>4. Review and Sign</h3>
+          <p>Contracts are reviewed and securely signed by all parties.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container section">
+      <h2>Features</h2>
+      <ul class="features-list">
+        <li><strong>Automated Legal Compliance:</strong> Always stay compliant with regulations.</li>
+        <li><strong>Dynamic Contract Generation:</strong> Generate accurate contracts instantly.</li>
+        <li><strong>Secure E-Signature:</strong> Sign contracts securely from anywhere.</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-container section">
+      <h2>Contact Us</h2>
+      <form action="/contact" method="post" class="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Supply Chain LawTech. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Add fade-in effect to sections on scroll
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Shrinking header on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+  </script>
+</body>
+</html>

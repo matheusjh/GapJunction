@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Supply Chain LawTech</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #8e9eab, #eef2f3);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .btn, .btn-link {
+      background-color: #2d3436;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover, .btn-link:hover {
+      background-color: #84fab0;
+      color: #2d3436;
+      transform: scale(1.05);
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: #007BFF;
+      font-size: 1rem;
+      padding: 0;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #2d3436;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .navbar nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar nav ul li a {
+      color: #fff;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar nav ul li a:hover {
+      background-color: #84fab0;
+      color: #2d3436;
+    }
+
+    /* Login Container */
+    .login-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .image-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-image {
+      width: 80%; /* Adjust the image size */
+      max-width: 500px; /* Optional: Limit the maximum width */
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .form-section {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      z-index: 1;
+    }
+
+    .form-section h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .form-section label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .form-section input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .popup-content label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .popup-content input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .popup-content .btn {
+      width: 100%;
+    }
+
+    .popup .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #f44336;
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .popup .close-btn:hover {
+      background-color: #e57373;
+    }
+
+    .popup.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2d3436;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+  </style>
+
+
+  <script>
+    const registerBtn = document.getElementById('registerBtn');
+    const registerPopup = document.getElementById('registerPopup');
+    const closePopup = document.getElementById('closePopup');
+
+    registerBtn.addEventListener('click', () => {
+      registerPopup.classList.add('visible');
+    });
+
+    closePopup.addEventListener('click', () => {
+      registerPopup.classList.remove('visible');
+    });
+  </script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">Supply Chain LawTech</a>
+      <nav>
+        <ul>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="login-container">
+    <!-- Image on the left -->
+    <div class="image-container">
+      <img src="https://cdn.corporatefinanceinstitute.com/assets/Supply-Chain-Example.png" alt="Supply Chain Example" class="login-image">
+    </div>
+    
+    <!-- Login Form Section -->
+    <section class="form-section">
+      <h2>Login</h2>
+      <form action="my-account.html" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button id="loginBtn" type="button" class="btn">Login</button>
+      </form>
+      <p>Don't have an account? <button class="btn-link" id="registerBtn">Register</button></p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('loginBtn').addEventListener('click', function() {
+      // Retrieve input values
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Retrieve stored user data from local storage
+      const storedUser = localStorage.getItem('user');
+
+      // Check if user data exists in local storage
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+
+        // Validate user credentials
+        if (user.email === email && user.password === password) {
+          // Redirect to index.html
+          window.location.href = 'index.html';
+        } else {
+          alert('Invalid email or password.');
+        }
+      } else {
+        alert('No registered user found. Please register first.');
+      }
+    });
+  </script>
+
+  <!-- Register Form Popup -->
+  <div id="registerPopup" class="popup">
+    <div class="popup-content">
+      <span class="close-btn" id="closePopup">&times;</span>
+      <h2>Register</h2>
+      <form action="my-account.html" method="post">
+        <label for="reg-name">Full Name:</label>
+        <input type="text" id="reg-name" name="name" required>
+        <label for="reg-email">Email:</label>
+        <input type="email" id="reg-email" name="email" required>
+        <label for="reg-password">Password:</label>
+        <input type="password" id="reg-password" name="password" required>
+        <button type="button" class="btn">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Supply Chain LawTech. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
